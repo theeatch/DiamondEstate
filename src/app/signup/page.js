@@ -14,12 +14,13 @@ export default function Component() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
+      await doCreateUserWithEmailAndPassword(email, password, firstName, lastName, phoneNo);
       // Redirect to the login page after successful registration
       router.push("/login");
     } catch (error) {
@@ -86,6 +87,16 @@ export default function Component() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="phoneNo">Phone Number</Label>
+          <Input
+            id="phoneNO"
+            required
+            type="number"
+            value={phoneNo}
+            onChange={(e) => setPhoneNo(e.target.value)}
           />
         </div>
         <Button className="w-full" type="submit">

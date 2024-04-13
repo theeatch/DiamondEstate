@@ -1,9 +1,11 @@
+"use client";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState, useContext } from "react";
 import {auth} from "@/firebase/firebase";
 import { createContext } from "react";
 
-const AuthContext = createContext({ isLoggedIn: false });
+const AuthContext = createContext({ userLoggedIn: false });
+
 export function useAuth() {
   return useContext(AuthContext);
 }
@@ -12,6 +14,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -28,10 +31,11 @@ export function AuthProvider({ children }) {
     }
     setLoading(false);
   }
-
+  
   const value = {
     currentUser,
     userLoggedIn,
+    setUserLoggedIn,
     loading,
   };
 

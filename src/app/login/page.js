@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 export default function Component() {
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -29,6 +29,7 @@ export default function Component() {
       try {
         await doSignInWithEmailAndPassword(email, password);
         // Redirect to home page after successful login
+        console.log("logged in", userLoggedIn)
         router.push("/");
       } catch (error) {
         setErrorMessage(error.message);
@@ -37,11 +38,22 @@ export default function Component() {
     }
   };
 
+  useEffect(() => {
+    if (userLoggedIn) {
+      router.replace("/");
+      console.log("logged in", userLoggedIn)
+
+    }
+    else{
+      console.log("Not logged in", userLoggedIn);
+    }
+    
+  }, [userLoggedIn, router]);
   if (!isClient) return null; // Guard clause for server-side rendering
 
   return (
     <div className="w-full h-full ">
-      {isLoggedIn && router.replace("/")}
+      
       <div className="text-center mt-6">
         <Image
           alt="Logo"
