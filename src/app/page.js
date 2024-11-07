@@ -180,14 +180,14 @@ export default function Component() {
     return matchesSearch && matchesSpace && matchesIdMandatory && matchesGym;
   });
 
-  useEffect(() => {
-    if (!userLoggedIn) {
-      router.replace("/login");
-      console.log("Not logged in", userLoggedIn);
-    } else {
-      console.log("logged in", userLoggedIn);
-    }
-  }, [userLoggedIn, router]);
+  // useEffect(() => {
+  //   if (!userLoggedIn) {
+  //     router.replace("/login");
+  //     console.log("Not logged in", userLoggedIn);
+  //   } else {
+  //     console.log("logged in", userLoggedIn);
+  //   }
+  // }, [userLoggedIn, router]);
 
   return (
     <div className="flex flex-col h-full">

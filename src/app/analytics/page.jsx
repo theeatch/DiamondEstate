@@ -134,7 +134,7 @@ const Page = () => {
 
   const handlePredictPrice = () => {
     const randomPrice = (Math.random() * 10000).toFixed(2); // Generates a random price between 0 and 1000
-    setPrice(`Predicted Price: $${randomPrice}`);
+    setPrice(`$${randomPrice}`);
   };
 
   return (
@@ -205,16 +205,23 @@ const Page = () => {
           >
             Predict Price!
           </button>
-          {price && <div className="mt-4 text-lg text-center">{price}</div>}
+          {price && (
+            <div className="mt-4 text-lg text-center">
+              <span className="text-3xl text-green-800 font-semibold">
+                Predicted Price:
+              </span>
+              <span className="text-2xl ml-2">{price}</span>
+            </div>
+          )}
         </form>
-        {predictedPrice && (
+        {/* {predictedPrice && (
           <p className="text-5xl ">
             <p className="text-7xl text-blue-700 font-bold">
               Predicted Price
             </p>
             : Rs {predictedPrice}
           </p>
-        )}
+        )} */}
       </div>
 
       <section className="h-full w-1/4 mx-auto">
