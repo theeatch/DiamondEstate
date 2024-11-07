@@ -98,8 +98,8 @@ const projects = [
 
 const getRandomProjects = () => {
   const numProjectsToShow = Math.random() > 0.5 ? 4 : 3;
-  const shuffledProjects = projects.sort(() => 0.5 - Math.random()); 
-  return shuffledProjects.slice(0, numProjectsToShow); 
+  const shuffledProjects = projects.sort(() => 0.5 - Math.random());
+  return shuffledProjects.slice(0, numProjectsToShow);
 };
 
 const Page = () => {
@@ -122,13 +122,20 @@ const Page = () => {
     const price = await predictPrice(formData);
     setPredictedPrice(price);
   };
-  
+
   const [randomProjects, setRandomProjects] = useState([]);
 
   useEffect(() => {
     const projects = getRandomProjects();
     setRandomProjects(projects);
   }, []);
+
+  const [price, setPrice] = useState(null);
+
+  const handlePredictPrice = () => {
+    const randomPrice = (Math.random() * 10000).toFixed(2); // Generates a random price between 0 and 1000
+    setPrice(`Predicted Price: $${randomPrice}`);
+  };
 
   return (
     <div className="w-full h-full flex  mt-4">
@@ -194,11 +201,20 @@ const Page = () => {
           <button
             type="submit"
             className="p-4 rounded-xl bg-blue-500  mx-auto text-white hover:scale-110 font-semibold duration-300"
+            onClick={handlePredictPrice}
           >
             Predict Price!
           </button>
+          {price && <div className="mt-4 text-lg text-center">{price}</div>}
         </form>
-        {predictedPrice && <p className="text-5xl text-blue-500 font-semibold">Predicted Price: Rs {predictedPrice}</p>}
+        {predictedPrice && (
+          <p className="text-5xl ">
+            <p className="text-7xl text-blue-700 font-bold">
+              Predicted Price
+            </p>
+            : Rs {predictedPrice}
+          </p>
+        )}
       </div>
 
       <section className="h-full w-1/4 mx-auto">
