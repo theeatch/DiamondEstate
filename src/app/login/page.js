@@ -18,41 +18,41 @@ export default function Component() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // if (!isSigningIn) 
+    if (!isSigningIn) 
     {
       setIsSigningIn(true);
-      // try {
-        // await doSignInWithEmailAndPassword(email, password);
+      try {
+        await doSignInWithEmailAndPassword(email, password);
         // Redirect to home page after successful login
         console.log("logged in", userLoggedIn)
         router.push("/");
-      // } 
-      // catch (error) {
-      //   setErrorMessage(error.message);
-      //   setIsSigningIn(false);
-      // }
+      } 
+      catch (error) {
+        setErrorMessage(error.message);
+        setIsSigningIn(false);
+      }
     }
   };
 
-  // useEffect(() => {
-  //   // if (userLoggedIn)
-  //    {
-  //     router.replace("/");
-  //     console.log("logged in", userLoggedIn)
+  useEffect(() => {
+    if (userLoggedIn)
+     {
+      router.replace("/");
+      console.log("logged in", userLoggedIn)
 
-  //   }
-  //   // else{
-  //   //   console.log("Not logged in", userLoggedIn);
-  //   // }
+    }
+    else{
+      console.log("Not logged in", userLoggedIn);
+    }
     
-  // }, [userLoggedIn, router]);
-  // if (!isClient) return null; // Guard clause for server-side rendering
+  }, [userLoggedIn, router]);
+  if (!isClient) return null; // Guard clause for server-side rendering
 
   return (
     <div className="w-full h-full ">
